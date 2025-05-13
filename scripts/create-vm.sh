@@ -9,7 +9,7 @@ echo -e "${YELLOW}Iniciando provisionamento da infraestrutura na Azure...${NC}"
 
 # Configurações da VM
 RESOURCE_GROUP="MottuChallenge"
-LOCATION="brazil-south"
+LOCATION="brazilsouth"
 VM_NAME="mottu-app-vm"
 VM_SIZE="Standard_B2s"
 ADMIN_USERNAME="azureuser"
