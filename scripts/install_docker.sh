@@ -14,7 +14,7 @@ if [ -f "vm_ip.txt" ]; then
     echo -e "${GREEN}IP da VM: $VM_IP${NC}"
 else
     echo -e "${YELLOW}Arquivo vm_ip.txt não encontrado. Por favor, informe o IP da VM:${NC}"
-    read -p "IP da VM: " VM_IP
+    read -p "IP da VM: " $VM_IP
 fi
 
 VM_USER="azureuser"
@@ -53,7 +53,8 @@ fi
 
 # Adicionar chave GPG oficial do Docker
 echo -e "${YELLOW}Adicionando chave GPG do Docker...${NC}"
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 if [ $? -ne 0 ]; then
     echo -e "${RED}Erro ao adicionar chave GPG do Docker.${NC}"
     exit 1
@@ -128,16 +129,7 @@ chmod +x install_docker_remote.sh
 
 echo -e "${GREEN}Script de instalação do Docker criado: install_docker_remote.sh${NC}"
 echo -e "${GREEN}=============================================${NC}"
-echo -e "${YELLOW}Para instalar o Docker na VM, você tem duas opções:${NC}"
-echo -e "\n${BLUE}Opção 1: Copiar o script para a VM e executá-lo:${NC}"
+echo -e "${YELLOW}Para instalar o Docker na VM digite estes comandos:{NC}"
 echo -e "scp install_docker_remote.sh $VM_USER@$VM_IP:~/"
-echo -e "ssh $VM_USER@$VM_IP 'bash install_docker_remote.sh'"
-
-echo -e "\n${BLUE}Opção 2: Conectar-se à VM e executar os comandos manualmente:${NC}"
-echo -e "ssh $VM_USER@$VM_IP"
-echo -e "# Após conectar, copie e cole o conteúdo do arquivo install_docker_remote.sh"
-
+echo -e "ssh azureuser@$VM_IP 'bash install_docker_remote.sh'"
 echo -e "\n${GREEN}=============================================${NC}"
-echo -e "${YELLOW}Após a instalação do Docker, você poderá implantar sua aplicação Spring Boot com:${NC}"
-echo -e "docker run -d --name mottu-spring-app -p 8080:8080 -v ~/app-data:/data --restart unless-stopped seu-dockerhub/mottu-app:latest"
-echo -e "${GREEN}=============================================${NC}"

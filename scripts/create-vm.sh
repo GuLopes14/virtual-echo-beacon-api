@@ -51,12 +51,27 @@ VM_RESULT=$(az vm create \
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Máquina virtual criada com sucesso!${NC}"
-    # Extrair o IP público
-    PUBLIC_IP=$(echo $VM_RESULT | jq -r '.publicIpAddress')
-    echo -e "${GREEN}IP Público da VM: $PUBLIC_IP${NC}"
-    # Salvar IP em um arquivo para uso posterior
+    
+    VM_RESULT_FILE="vm_result.json"
+    echo $VM_RESULT > $VM_RESULT_FILE
+
+    if command -v jq &> /dev/null; then
+        # Se o jq estiver instalado
+        PUBLIC_IP=$(jq -r '.publicIpAddress' $VM_RESULT_FILE)
+    else
+        # Alternativa sem jq, usando grep e cut (mais básico)
+        PUBLIC_IP=$(grep -o '"publicIpAddress": "[^"]*' $VM_RESULT_FILE | cut -d'"' -f4)
+    fi
+
+    # Verificar se PUBLIC_IP não está vazio
+    if [ -z "$PUBLIC_IP" ]; then
+        echo -e "\033[0;31mNão foi possível extrair o IP público automaticamente.${NC}"
+        echo -e "${YELLOW}Por favor, obtenha o IP público manualmente no portal da Azure e informe abaixo:${NC}"
+        read -p "IP Público da VM: " PUBLIC_IP
+    fi
+
     echo $PUBLIC_IP > vm_ip.txt
-    echo -e "${YELLOW}IP da VM salvo em 'vm_ip.txt'${NC}"
+    echo -e "${YELLOW}IP da VM salvo em 'vm_ip.txt': $PUBLIC_IP${NC}"
 else
     echo -e "\033[0;31mErro ao criar a máquina virtual.${NC}"
     exit 1
