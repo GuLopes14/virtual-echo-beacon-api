@@ -85,10 +85,9 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 # 📘 Exemplos de Requisições para a API 
 
 ## 🔹 Criar um EchoBeacon (POST)
+- POST localhost:8080/echo-beacons
+- Content-Type: application/json
 ```http
-POST localhost:8080/echo-beacons
-Content-Type: application/json
-
 {
   "numeroIdentificacao": 4,
   "status": "DESATIVADO",
@@ -99,10 +98,9 @@ Content-Type: application/json
 ```
 
 ## 🔹 Atualizar um EchoBeacon (PUT)
+- PUT localhost:8080/echo-beacons/4
+- Content-Type: application/json
 ```http
-PUT localhost:8080/echo-beacons/4
-Content-Type: application/json
-
 {
   "numeroIdentificacao": 4,
   "status": "ATIVO",
@@ -113,10 +111,9 @@ Content-Type: application/json
 ```
 
 ## 🔹 Criar uma Moto (POST)
+- POST localhost:8080/motos
+- Content-Type: application/json
 ```http
-POST localhost:8080/motos
-Content-Type: application/json
-
 {
   "placa": "XYZ5678",
   "chassi": "1HGCM82633A654321",
@@ -130,10 +127,10 @@ Content-Type: application/json
 ```
 
 ## 🔹 Atualizar uma Moto (PUT)
-```http
-PUT localhost:8080/motos/4
-Content-Type: application/json
 
+- PUT localhost:8080/motos/4
+- Content-Type: application/json
+```http
 {
   "placa": "XYZ5678",
   "chassi": "1HGCM82633A654321",
@@ -148,10 +145,10 @@ Content-Type: application/json
 
 ## ❌ Deletar uma Moto (DELETE)
 ```http
-DELETE localhost:8080/motos/4
+ localhost:8080/motos/4
 ```
 
 ## ❌ Deletar um EchoBeacon (DELETE)
 ```http
-DELETE localhost:8080/echo-beacons/4
+localhost:8080/echo-beacons/4
 ```
