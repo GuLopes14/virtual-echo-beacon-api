@@ -144,11 +144,11 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 ```
 
 ## ❌ Deletar uma Moto (DELETE)
-```http
+```
  localhost:8080/motos/4
 ```
 
 ## ❌ Deletar um EchoBeacon (DELETE)
-```http
+```
 localhost:8080/echo-beacons/4
 ```
