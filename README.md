@@ -91,6 +91,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
     ```bash
     docker run -p 8080:8080 -d seuUsarioDockerHub/ride-echo-api
     ```
+    - **Nota:** Insira a flag -d para executar o container em modo de background.
 
 ## Uso 🚀
 
