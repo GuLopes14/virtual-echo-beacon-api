@@ -28,34 +28,43 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 - **Maven**: Para o gerenciamento de dependências do projeto Java.
 
 ### Passos
+1. **Instale o maven**
+    ```bash
+    mvn clean install  
+    ```
 
-1. **Baixe a imagem no seu Docker Desktop**
+2. **Crie a imagem no seu Docker Desktop**
     ```bash
     docker build -t seuUsuarioDockerHub/ride-echo-api .  
     ```
 
-2. **Acesse a sua conta da azure**
+3. **Baixe a imagem no seu Docker Desktop**
+    ```bash
+    docker push seuUsuarioDockerHub/ride-echo-api .  
+    ```
+
+4. **Acesse a sua conta da azure**
     ```bash
     az login
     ```
 
-3. **Acesse o diretório de scripts**
+5. **Acesse o diretório de scripts**
     ```bash
     cd ./scripts/
     ```
 
-4. **Crie uma VM na Azure**
+6. **Crie uma VM na Azure**
     ```bash
     bash create-vm.sh
     ```
     - **Nota:** O script `create-vm.sh` irá criar uma VM na Azure e registrar o IP público em um arquivo chamado `vm_ip.txt`.
 
-5. **Execute o arquivo de instalação do docker**
+7. **Execute o arquivo de instalação do docker**
     ```bash
     bash install_docker.sh
     ```
 
-6. **Baixe o Docker na VM**
+8. **Baixe o Docker na VM**
     ```bash
     bash install_docker.sh
     scp install_docker_remote.sh azureuser@<IpFornecido>:~/
@@ -63,22 +72,22 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
     ```
      - **Nota:** Substitua `<IpFornecido>` pelo IP público fornecido no terminal, caso estiver com dificuldades de achar, procure no arquivo `vm_ip.txt`.
 
-7. **Faça login na VM**
+9. **Faça login na VM**
     ```bash
     ssh azureuser@<IpFornecido>
     ```
 
-8. **Faça login no docker**
+10. **Faça login no docker**
     ```bash
     docker login
     ```
 
-9. **Resgate a imagem criada anteriormente**
+11. **Resgate a imagem criada anteriormente**
     ```bash
     docker pull seuUsuarioDockerHub/ride-echo-api
     ```
 
-10. **Execute a imagem do Docker na VM da Azure**
+12. **Execute a imagem do Docker na VM da Azure**
     ```bash
     docker run -p 8080:8080 -d seuUsarioDockerHub/ride-echo-api
     ```
