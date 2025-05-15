@@ -40,7 +40,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 3. **Baixe a imagem no seu Docker Desktop**
     ```bash
-    docker push seuUsuarioDockerHub/ride-echo-api .  
+    docker push seuUsuarioDockerHub/ride-echo-api
     ```
 
 4. **Acesse a sua conta da azure**
