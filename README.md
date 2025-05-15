@@ -29,63 +29,66 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 ### Passos
 
-1. **Acesse a sua conta da azure**
+1. **Baixe a imagem no seu Docker Desktop**
+    docker build -t seuUsuarioDockerHub/ride-echo-api .  
+
+2. **Acesse a sua conta da azure**
     ```bash
     az login
     ```
-2. **Acesse o diretório de scripts**
+3. **Acesse o diretório de scripts**
     ```bash
     cd ./scripts/
     ```
 
-3. **Crie uma VM na Azure**
+4. **Crie uma VM na Azure**
     ```bash
     bash create-vm.sh
     ```
     - **Nota:** O script `create-vm.sh` irá criar uma VM na Azure e registrar o IP público em um arquivo chamado `vm_ip.txt`.
 
-4. **Instale o Docker na VM remota**
+5. **Execute o arquivo de instalação do docker**
+    ```bash
+    bash install_docker.sh
+    ```
+
+6. **Baixe o Docker na VM**
     ```bash
     bash install_docker.sh
     scp install_docker_remote.sh azureuser@<IpFornecido>:~/
     ssh azureuser@<IpFornecido> 'bash install_docker_remote.sh'
     ```
-    - **Nota:** Substitua `<IpFornecido>` pelo IP público fornecido no terminal, caso estiver com dificuldades de achar, procure no arquivo `vm_ip.txt`.
+     - **Nota:** Substitua `<IpFornecido>` pelo IP público fornecido no terminal, caso estiver com dificuldades de achar, procure no arquivo `vm_ip.txt`.
 
-5. **Volte para o diretório raiz do projeto**
+7. **Faça login na VM**
     ```bash
-    cd ..
+    ssh azureuser@<IpFornecido>
     ```
 
-6. **Compile e instale o projeto Java**
-    ```bash
-    mvn clean install
-    ```
-
-7. **Faça login no Docker Hub** (caso utilize repositório privado)
+8. **Faça login no docker**
     ```bash
     docker login
     ```
 
-8. **Construa a imagem Docker da API RideEcho**
+9. **Resgate a imagem criada anteriormente**
     ```bash
-    docker build -t ride-echo-api .
+    docker pull seuUsuarioDockerHub/ride-echo-api
     ```
 
-9. **Execute o container Docker**
+10. **Execute a imagem do Docker na VM da Azure**
     ```bash
-    docker run -p 8080:8080 ride-echo-api
+    docker run -p 8080:8080 -d gustal14/ride-echo-api
     ```
 
 ## Uso 🚀
 
 - **Acesso à aplicação**: Após o container estar em execução, acesse a API pelo postman/ insomnia, etc.
-- **URL**: `http://localhost:8080/`
+- **URL**: `http://<ipFornecidoDaVM:8080/`
 
 # 📘 Exemplos de Requisições para a API 
 
 ## 🔹 Criar um EchoBeacon (POST)
-- POST localhost:8080/echo-beacons
+- POST ipFornecidoDaVM:8080/echo-beacons
 - Content-Type: application/json
 ```http
 {
@@ -98,7 +101,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 ```
 
 ## 🔹 Atualizar um EchoBeacon (PUT)
-- PUT localhost:8080/echo-beacons/4
+- PUT ipFornecidoDaVM:8080/echo-beacons/4
 - Content-Type: application/json
 ```http
 {
@@ -111,7 +114,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 ```
 
 ## 🔹 Criar uma Moto (POST)
-- POST localhost:8080/motos
+- POST ipFornecidoDaVM:8080/motos
 - Content-Type: application/json
 ```http
 {
@@ -128,7 +131,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 ## 🔹 Atualizar uma Moto (PUT)
 
-- PUT localhost:8080/motos/4
+- PUT ipFornecidoDaVM:8080/motos/4
 - Content-Type: application/json
 ```http
 {
@@ -145,10 +148,10 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 ## ❌ Deletar uma Moto (DELETE)
 ```
- localhost:8080/motos/4
+ipFornecidoDaVM:8080/motos/4
 ```
 
 ## ❌ Deletar um EchoBeacon (DELETE)
 ```
-localhost:8080/echo-beacons/4
+ipFornecidoDaVM:8080/echo-beacons/4
 ```

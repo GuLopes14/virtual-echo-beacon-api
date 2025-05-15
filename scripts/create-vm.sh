@@ -67,7 +67,7 @@ if [ $? -eq 0 ]; then
     if [ -z "$PUBLIC_IP" ]; then
         echo -e "\033[0;31mNão foi possível extrair o IP público automaticamente.${NC}"
         echo -e "${YELLOW}Por favor, obtenha o IP público manualmente no portal da Azure e informe abaixo:${NC}"
-        read -p "IP Público da VM: " PUBLIC_IP
+        read -p "IP Público da VM: " $PUBLIC_IP
     fi
 
     echo $PUBLIC_IP > vm_ip.txt
@@ -88,16 +88,6 @@ az network nsg rule create \
     --protocol tcp \
     --priority 1001 \
     --destination-port-range 80 \
-    --access allow
-
-echo -e "${YELLOW}Abrindo porta HTTPS (443)...${NC}"
-az network nsg rule create \
-    --resource-group $RESOURCE_GROUP \
-    --nsg-name "${VM_NAME}NSG" \
-    --name allow-https \
-    --protocol tcp \
-    --priority 1002 \
-    --destination-port-range 443 \
     --access allow
 
 echo -e "${YELLOW}Abrindo porta Spring Boot (8080)...${NC}"

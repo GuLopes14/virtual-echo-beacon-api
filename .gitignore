@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+vm_ip.txt
+
+vm_result.json
+
+install_docker_remote.sh
