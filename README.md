@@ -28,7 +28,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 - **Maven**: Para o gerenciamento de dependências do projeto Java.
 
 ### Passos
-1. **Instale o projeto**
+1. **Instale o artefato**
     ```bash
     mvn clean install  
     ```
