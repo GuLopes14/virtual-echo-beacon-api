@@ -30,12 +30,15 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 ### Passos
 
 1. **Baixe a imagem no seu Docker Desktop**
+    ```bash
     docker build -t seuUsuarioDockerHub/ride-echo-api .  
+    ```
 
 2. **Acesse a sua conta da azure**
     ```bash
     az login
     ```
+
 3. **Acesse o diretório de scripts**
     ```bash
     cd ./scripts/
@@ -77,7 +80,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 10. **Execute a imagem do Docker na VM da Azure**
     ```bash
-    docker run -p 8080:8080 -d gustal14/ride-echo-api
+    docker run -p 8080:8080 -d seuUsarioDockerHub/ride-echo-api
     ```
 
 ## Uso 🚀
