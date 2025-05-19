@@ -35,5 +35,3 @@ build/
 vm_ip.txt
 
 vm_result.json
-
-install_docker_remote.sh

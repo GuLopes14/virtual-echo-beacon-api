@@ -3,33 +3,6 @@
 # Cores para saída no terminal
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-echo -e "${YELLOW}Script de instalação do Docker na VM Azure...${NC}"
-
-# Obter IP da VM
-if [ -f "vm_ip.txt" ]; then
-    VM_IP=$(cat vm_ip.txt)
-    echo -e "${GREEN}IP da VM: $VM_IP${NC}"
-else
-    echo -e "${YELLOW}Arquivo vm_ip.txt não encontrado. Por favor, informe o IP da VM:${NC}"
-    read -p "IP da VM: " $VM_IP
-fi
-
-VM_USER="azureuser"
-
-# Exibir instrução de conexão
-echo -e "\n${BLUE}O script vai gerar o comando de instalação do Docker.${NC}"
-echo -e "${BLUE}Será necessário conectar-se à VM e executar o script gerado.${NC}\n"
-
-# Criar o arquivo de script de instalação do Docker
-cat > install_docker_remote.sh << 'EOF'
-#!/bin/bash
-
-# Cores para saída no terminal
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
@@ -122,14 +95,3 @@ echo -e "${GREEN}Docker instalado com sucesso!${NC}"
 echo -e "${GREEN}Diretório para persistência criado: ~/app-data${NC}"
 echo -e "${GREEN}=============================================${NC}"
 echo -e "${YELLOW}Observação: Você precisará abrir uma nova sessão SSH ou executar 'newgrp docker' para usar o Docker sem sudo${NC}"
-EOF
-
-# Tornar o script executável
-chmod +x install_docker_remote.sh
-
-echo -e "${GREEN}Script de instalação do Docker criado: install_docker_remote.sh${NC}"
-echo -e "${GREEN}=============================================${NC}"
-echo -e "${YELLOW}Para instalar o Docker na VM digite estes comandos:{NC}"
-echo -e "scp install_docker_remote.sh $VM_USER@$VM_IP:~/"
-echo -e "ssh azureuser@$VM_IP 'bash install_docker_remote.sh'"
-echo -e "\n${GREEN}=============================================${NC}"

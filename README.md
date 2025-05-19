@@ -59,35 +59,29 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
     ```
     - **Nota:** O script `create-vm.sh` irá criar uma VM na Azure e registrar o IP público em um arquivo chamado `vm_ip.txt`.
 
-7. **Execute o arquivo de instalação do docker**
+7. **Instale o Docker na VM**
     ```bash
-    bash install_docker.sh
-    ```
-
-8. **Baixe o Docker na VM**
-    ```bash
-    bash install_docker.sh
-    scp install_docker_remote.sh azureuser@<IpFornecido>:~/
+    scp install_docker.sh azureuser@<IpFornecido>:~/
     ssh azureuser@<IpFornecido> 'bash install_docker_remote.sh'
     ```
      - **Nota:** Substitua `<IpFornecido>` pelo IP público fornecido no terminal, caso estiver com dificuldades de achar, procure no arquivo `vm_ip.txt`.
 
-9. **Faça login na VM**
+8. **Faça login na VM**
     ```bash
     ssh azureuser@<IpFornecido>
     ```
 
-10. **Faça login no docker**
+9. **Faça login no docker**
     ```bash
     docker login
     ```
 
-11. **Resgate a imagem criada anteriormente**
+10. **Resgate a imagem criada anteriormente**
     ```bash
     docker pull seuUsuarioDockerHub/ride-echo-api
     ```
 
-12. **Execute a imagem do Docker na VM da Azure**
+11. **Execute a imagem do Docker na VM da Azure**
     ```bash
     docker run -p 8080:8080 -d seuUsarioDockerHub/ride-echo-api
     ```
