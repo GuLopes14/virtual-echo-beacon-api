@@ -61,7 +61,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 7. **Instale o Docker na VM**
     ```bash
-    scp install_docker.sh azureuser@<IpFornecido>:~/
+    scp install_docker_remote.sh azureuser@<IpFornecido>:~/
     ssh azureuser@<IpFornecido> 'bash install_docker_remote.sh'
     ```
      - **Nota:** Substitua `<IpFornecido>` pelo IP público fornecido no terminal, caso estiver com dificuldades de achar, procure no arquivo `vm_ip.txt`.

@@ -82,16 +82,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Criar diretório para persistência dos dados
-echo -e "${YELLOW}Criando diretório para persistência de dados...${NC}"
-mkdir -p ~/app-data
-if [ $? -ne 0 ]; then
-    echo -e "${RED}Erro ao criar diretório para persistência.${NC}"
-    exit 1
-fi
-
 echo -e "${GREEN}=============================================${NC}"
 echo -e "${GREEN}Docker instalado com sucesso!${NC}"
-echo -e "${GREEN}Diretório para persistência criado: ~/app-data${NC}"
 echo -e "${GREEN}=============================================${NC}"
-echo -e "${YELLOW}Observação: Você precisará abrir uma nova sessão SSH ou executar 'newgrp docker' para usar o Docker sem sudo${NC}"
