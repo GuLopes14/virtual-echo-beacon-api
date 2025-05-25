@@ -91,6 +91,7 @@ Resolver o problema de identificar rapidamente as motos no pátio, otimizando a 
 
 - **Acesso à aplicação**: Após o container estar em execução, acesse a API pelo postman/ insomnia, etc.
 - **URL**: `http://<ipFornecidoDaVM:8080/`
+- **URL DE ACESSO AO H2**: `http://<ipFornecidoDaVM>:8080/h2-console`
 
 # 📘 Exemplos de Requisições para a API 
 
